@@ -16,7 +16,7 @@
 	  
 ## Getting Started
 
-> Add the dependency (Facebook Ads Library) - 
+>> Add the dependency (Facebook Ads Library) - 
 ```
 dependencies {
           implementation 'com.github.AtikulSoftware:FacebookMetaAds:1.0.0'
