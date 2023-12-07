@@ -7,7 +7,7 @@
   <h3 align="center">Master Juba/Funny Video Project -  Facebook Ads Implement</h3>
 
   <p align="center">
-    Best Easy Way for Create GDPR_Message
+    Best Easy Way for Facebook Ads Implement
     <br/>
     <br/>
     <a href=""><strong> For Details Video Tutorial »</strong></a>
