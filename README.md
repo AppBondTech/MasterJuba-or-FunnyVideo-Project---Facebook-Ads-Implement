@@ -10,14 +10,10 @@
     Best Easy Way for Facebook Ads Implement
     <br/>
     <br/>
-    <a href=""><strong> For Details Video Tutorial »</strong></a>
+    <a href="https://youtu.be/yvtoXlZvuvk"><strong> For Details Video Tutorial »</strong></a>
     <br/>
     <br/>
 	  
-## About The Project
-
-![Screen Shot](https://mdhasanmahmud.000webhostapp.com/inappupdate/gdprmessage.jpg)
-
 ## Getting Started
 
 > Step 1. Make Sure Add Internet and Ads Permissiton in Manifests - 
