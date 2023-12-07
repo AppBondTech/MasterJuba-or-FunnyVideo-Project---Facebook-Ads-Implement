@@ -16,78 +16,58 @@
 	  
 ## Getting Started
 
-> Step 1. Make Sure Add Internet and Ads Permissiton in Manifests - 
+> Add the dependency (Facebook Ads Library) - 
 ```
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-```
-
-> Step 2. Add the dependency - 
-```
-implementation 'com.google.android.ump:user-messaging-platform:2.1.0'
-```
-
-> Step 3. Above On Create Bundle is where we declare various variables - 
-```
-private ConsentInformation consentInformation;
-private final AtomicBoolean isMobileAdsInitializeCalled = new AtomicBoolean(false);
-```
-
-> Setp 4. Anywhere in the On Create Bundle - 
-```
-  //Create GDPR_Message (1st part)------------------------------------------------------ 
-       
-         ConsentRequestParameters params = new ConsentRequestParameters
-                .Builder()
-                .setTagForUnderAgeOfConsent(false)
-                .build();
-
-  consentInformation = UserMessagingPlatform.getConsentInformation(this);
-consentInformation.requestConsentInfoUpdate(
-     this,
-  params,
- (ConsentInformation.OnConsentInfoUpdateSuccessListener) () -> {
- UserMessagingPlatform.loadAndShowConsentFormIfRequired(
-   this,
-       (ConsentForm.OnConsentFormDismissedListener) loadAndShowError -> {
-if (loadAndShowError != null) {
- // Consent gathering failed.
- Log.w(TAG, String.format("%s: %s",
- loadAndShowError.getErrorCode(),
- loadAndShowError.getMessage()));
+dependencies {
+          implementation 'com.github.AtikulSoftware:FacebookMetaAds:1.0.0'
   }
-
-      // Consent has been gathered.
-        if (consentInformation.canRequestAds()) {
-              initializeMobileAdsSdk();
-           }
-      }
-      );
-   },
-   (ConsentInformation.OnConsentInfoUpdateFailureListener) requestConsentError -> {
-
- // Consent gathering failed.
-          Log.w(TAG, String.format("%s: %s",
-              requestConsentError.getErrorCode(),
-              requestConsentError.getMessage()));
-                    
-  });
-
-        
-        if (consentInformation.canRequestAds()) {
-            initializeMobileAdsSdk();
-        }
-
 ```
-> Step 5. Just below the last second bracket - 
+
+> Step 1. SplashScreen Code - 
 ```
-//Create GDPR_Message (2nd part)------------------------------------------------------ 
- private void initializeMobileAdsSdk() {
-    if (isMobileAdsInitializeCalled.getAndSet(true)) {
-      return;
+//SplashScreen
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Code here
+                Intent myIntent = new Intent(SplashScreen.this, Home.class);
+                startActivity(myIntent);
+                finish();
+            }
+        },5000);
+```
+
+> Step 2. Ads Control - 
+```
+public static void AdUnit(){
+        //facebook=========================================================================
+        com.atikulsoftware.metaadslibrary.MetaAds.AdsUnit.INTERSTITIAL = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID";
+        com.atikulsoftware.metaadslibrary.MetaAds.AdsUnit.BANNER = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID";
     }
-}
+
+```
+
+> Setp 3. SplashScreen.Java Code, Bellow OnCreate Bundle - 
+```
+ //Quick Ads Load=========================================================
+        AdsControl.AdUnit();
+        FacebookAds.loadInterstitial(SplashScreen.this);
+```
+> Step 4. Banner Ads Show, Home.Java, Bellow OnCreate Bundle - 
+```
+//Facebook ads
+FacebookAds.setBanner(findViewById(R.id.layBottomBanner), Home.this);
+```
+
+> Step 5. Final Code Iplement, Interstitial Ads - 
+```
+ //Show Interstitial Ads
+new FacebookAds(() -> {
+ // Next Action
+
+
+ }).showInterstitial();
 ```
 
 ## In Cooperation
